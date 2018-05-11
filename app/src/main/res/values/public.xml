@@ -16,7 +16,6 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- 通知栏图标 -->
+    <public id="0x7f030002" name="notification_out" type="drawable" />
 </resources>
