@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        //delete testInstrumentationRunner
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //最好携带测试包否则不通过
+    testImplementation 'junit:junit:4.12'
+}
+
+// 生成jar
+task makeJar(type: Jar, dependsOn: ['build']) {
+    destinationDir = file('build/outputs/jar/')//文件路径
+    baseName = "common-utils-lib"//文件名
+    version = "1.0.0"//版本号
+    from('build/intermediates/classes/debug')//打包资源信息
+    exclude('**/BuildConfig.class')
+    exclude('**/BuildConfig\$*.class')
+    exclude('**/R.class')
+    exclude('**/R\$*.class')
+    include('**/*.class')
+}
