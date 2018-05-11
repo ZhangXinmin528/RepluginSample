@@ -54,24 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         initViews();
 
-        findViewById(R.id.btn_start_plugin_for_result).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 刻意以“Alias（别名）”来打开
-                Intent intent = new Intent();
-                intent.setComponent(new ComponentName("demo1", "com.qihoo360.replugin.sample.demo1.activity.for_result.ForResultActivity"));
-                RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_DEMO1, null);
-            }
-        });
-
-        findViewById(R.id.btn_load_fragment_from_demo1).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
-            }
-        });
-
         findViewById(R.id.btn_start_demo3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +110,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         //app one
         findViewById(R.id.btn_start_app_one).setOnClickListener(this);
+        //app one for result
+        findViewById(R.id.btn_start_plugin_app_one_for_result).setOnClickListener(this);
+        //start fragment from app one
+        findViewById(R.id.btn_load_fragment_from_app_one).setOnClickListener(this);
     }
 
     private void testThreadClassLoader() {
@@ -216,6 +202,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 RePlugin.startActivity(mContext,
                         RePlugin.createIntent("com.qihoo360.replugin.sample.demo1",
                                 "com.qihoo360.replugin.sample.demo1.MainActivity"));
+                break;
+            case R.id.btn_start_plugin_app_one_for_result:
+                // 刻意以“Alias（别名）”来打开
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName("demo1", "com.qihoo360.replugin.sample.demo1.activity.for_result.ForResultActivity"));
+                RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_DEMO1, null);
+                break;
+            case R.id.btn_load_fragment_from_app_one:
+                startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
                 break;
             default:
                 break;

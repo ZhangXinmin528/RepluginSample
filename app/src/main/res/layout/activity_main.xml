@@ -28,18 +28,18 @@
         android:text="@string/startAppOne" />
 
     <Button
-        android:id="@+id/btn_start_plugin_for_result"
+        android:id="@+id/btn_start_plugin_app_one_for_result"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="@string/startDemo1ForResult" />
+        android:text="@string/startAppOneForResult" />
 
     <Button
-        android:id="@+id/btn_load_fragment_from_demo1"
+        android:id="@+id/btn_load_fragment_from_app_one"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="@string/startDemo1LoadFragment" />
+        android:text="@string/startAppOneLoadFragment" />
 
     <Button
         android:id="@+id/btn_start_demo3"
