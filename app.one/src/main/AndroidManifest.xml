@@ -3,19 +3,168 @@
     package="com.example.appone">
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:name=".MainOneApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainAppOneActivity">
+        <meta-data
+            android:name="process_map"
+            android:value="[appone]" />
+
+        <activity
+            android:name=".MainAppOneActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 最简Activity -->
+        <activity
+            android:name=".activity.standard.StandardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- theme 测试 -->
+        <!-- NoTitleBar -->
+        <activity
+            android:name=".activity.theme.ThemeBlackNoTitleBarActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
+        <!--ThemeDialog-->
+        <activity
+            android:name=".activity.theme.ThemeDialogActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <!-- NoTitleBarFullScreen -->
+        <activity
+            android:name=".activity.theme.ThemeBlackNoTitleBarFullscreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.example.appone.action.theme_fullscreen" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.example.appone.CATEGORY1" />
+            </intent-filter>
+        </activity>
+        <!-- SingleTop -->
+        <activity
+            android:name=".activity.single_top.SingleTopActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <!--TIActivity-->
+        <activity
+            android:name=".activity.single_instance.TIActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- TaskAffinity -->
+        <activity
+            android:name=".activity.task_affinity.TAActivity1"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_1"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.task_affinity.TAActivity2"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_1"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.task_affinity.TAActivity3"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_2"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".activity.task_affinity.TAActivity4"
+            android:launchMode="singleTask"
+            android:taskAffinity=":ta_2"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- TaskAffinity-end -->
+
+
+        <!-- IntentFilter -->
+        <activity
+            android:name=".activity.intent_filter.IntentFilterDemoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.appone.intent_filter" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="category_demo" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.preference.PrefActivity1"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.preference.PrefActivity2"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.webview.WebViewActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name=".provider.Provider2"
+            android:authorities="com.qihoo360.replugin.sample.demo1.provider2" />
+
+        <activity android:name=".activity.for_result.ForResultActivity" />
+
+        <activity android:name=".activity.file_provider.FileProviderActivity" />
+
+        <activity android:name=".activity.notify_test.NotifyActivity" />
+
+
+        <!-- receivers -->
+        <receiver android:name=".receivers.PluginDemo1Receiver">
+            <intent-filter>
+                <action android:name="com.qihoo360.repluginapp.replugin.receiver.ACTION1" />
+            </intent-filter>
+        </receiver>
+
+        <!-- service -->
+        <service android:name=".service.PluginDemoAppService" />
+
+        <service
+            android:name=".service.PluginDemoService1"
+            android:process=":bg" />
+
+        <service android:name=".service.PluginDemoService2">
+            <intent-filter>
+                <action android:name="com.example.appone.service.action.XXXX" />
+            </intent-filter>
+        </service>
+
+        <!-- 以下provider，作为插件时，可注释掉；作为单独APK时需要声明-->
+        <!--<provider
+            android:name=".provider.FileProvider"
+            android:authorities="com.qihoo360.replugin.sample.host.FILE_PROVIDER"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_path" />
+        </provider>-->
     </application>
 
 </manifest>

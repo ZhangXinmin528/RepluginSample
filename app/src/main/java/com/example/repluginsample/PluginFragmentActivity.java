@@ -33,17 +33,17 @@ public class PluginFragmentActivity extends FragmentActivity {
         */
 
         boolean isBuiltIn = true;
-        String pluginName = isBuiltIn ? "demo1" : "com.qihoo360.replugin.sample.demo1";
+        String pluginName = isBuiltIn ? "appone" : "com.example.appone";
 
         //注册相关Fragment的类
         //注册一个全局Hook用于拦截系统对XX类的寻找定向到Demo1中的XX类主要是用于在xml中可以直接使用插件中的类
-        RePlugin.registerHookingClass("com.qihoo360.replugin.sample.demo1.fragment.DemoFragment", RePlugin.createComponentName(pluginName, "com.qihoo360.replugin.sample.demo1.fragment.DemoFragment"), null);
+        RePlugin.registerHookingClass("com.example.appone.fragment.DemoFragment", RePlugin.createComponentName(pluginName, "com.example.appone.fragment.DemoFragment"), null);
         setContentView(R.layout.activity_plugin_fragment);
 
         //代码使用插件Fragment
         ClassLoader d1ClassLoader = RePlugin.fetchClassLoader(pluginName);//获取插件的ClassLoader
         try {
-            Fragment fragment = d1ClassLoader.loadClass("com.qihoo360.replugin.sample.demo1.fragment.DemoCodeFragment").asSubclass(Fragment.class).newInstance();//使用插件的Classloader获取指定Fragment实例
+            Fragment fragment = d1ClassLoader.loadClass("com.example.appone.fragment.DemoCodeFragment").asSubclass(Fragment.class).newInstance();//使用插件的Classloader获取指定Fragment实例
             getSupportFragmentManager().beginTransaction().add(R.id.container2, fragment).commit();//添加Fragment到UI
         } catch (InstantiationException e) {
             e.printStackTrace();

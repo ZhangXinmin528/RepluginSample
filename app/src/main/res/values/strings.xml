@@ -17,9 +17,9 @@
 <resources>
     <string name="app_name">RePluginSample演示示例</string>
     <string name="startAppOne">Start app one</string>
-    <string name="startDemo3">Start Kotlin Plugin (demo3) </string>
-    <string name="startDemo4">Start plugin webview</string>
+    <string name="startKotlinPlugin">Start kotlin plugin</string>
+    <string name="startPluginWebview">Start plugin webview</string>
     <string name="startAppOneForResult">Start plugin app one(forResult)</string>
-    <string name="startAppOneLoadFragment">Start plugin app one(Fragment from app one)</string>
+    <string name="startAppOneLoadFragment">Start plugin app one(fragment)</string>
     <string name="installPluginFromAssets">Install or update external plugin</string>
 </resources>

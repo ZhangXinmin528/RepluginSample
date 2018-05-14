@@ -23,19 +23,40 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 //for plugin
 apply plugin: 'replugin-plugin-gradle'
-
+//配置插件宿主信息
+repluginPluginConfig {
+    pluginName = "appone"
+    hostApplicationId = "com.example.repluginsample"
+    hostAppLauncherActivity = "com.example.repluginsample.MainActivity"
+}
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    //360 plugin
     implementation 'com.qihoo360.replugin:replugin-plugin-lib:2.2.4'
+    //utils
+    implementation files('libs/common-utils-lib-1.0.0.jar')//by lib.common
+    implementation(name: 'plugin-library-appone', ext: 'aar')//sample:compile aar(by lib.appone)
+
+}
+
+if (android.defaultConfig.multiDexEnabled) {
+    apply from: 'case.gradle'
 }

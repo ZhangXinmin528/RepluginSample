@@ -42,18 +42,18 @@
         android:text="@string/startAppOneLoadFragment" />
 
     <Button
-        android:id="@+id/btn_start_demo3"
+        android:id="@+id/btn_start_kotlin_plugin"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="@string/startDemo3" />
+        android:text="@string/startKotlinPlugin" />
 
     <Button
-        android:id="@+id/btn_start_demo4"
+        android:id="@+id/btn_start_plugin_webview"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="@string/startDemo4" />
+        android:text="@string/startPluginWebview" />
 
     <Button
         android:id="@+id/btn_install_apk_from_assets"

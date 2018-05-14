@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -38,7 +39,7 @@ import java.io.InputStream;
 /**
  * 宿主App：作为演示插件化开发的框架APP。
  */
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_DEMO1 = 0x011;
     private static final int RESULT_CODE_DEMO1 = 0x012;
@@ -53,49 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         initParamsAndValues();
 
         initViews();
-
-        findViewById(R.id.btn_start_demo3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 若没有安装，则直接提示“错误”
-                // TODO 将来把回调串联上
-                if (RePlugin.isPluginInstalled("demo3")) {
-                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("demo3", "com.qihoo360.replugin.sample.demo3.MainActivity"));
-                } else {
-                    Toast.makeText(MainActivity.this, "You must install demo3 first!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        findViewById(R.id.btn_start_demo4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 示例：直接通过宿主打开WebView插件中的Activity
-                // FIXME: 后续可以将webview MainActivity URL 改为动态传入
-                // 若没有安装，则直接提示“错误”
-                if (RePlugin.isPluginInstalled("webview")) {
-                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("webview", "com.qihoo360.replugin.sample.webview.MainActivity"));
-                } else {
-                    Toast.makeText(MainActivity.this, "You must install webview first!", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        findViewById(R.id.btn_install_apk_from_assets).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                final ProgressDialog pd = ProgressDialog.show(MainActivity.this, "Installing...", "Please wait...", true, true);
-                // FIXME: 仅用于安装流程演示 2017/7/24
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        simulateInstallExternalPlugin();
-                        pd.dismiss();
-                    }
-                }, 1000);
-            }
-        });
 
         // 刻意使用Thread的ClassLoader来测试效果
         testThreadClassLoader();
@@ -114,6 +72,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.btn_start_plugin_app_one_for_result).setOnClickListener(this);
         //start fragment from app one
         findViewById(R.id.btn_load_fragment_from_app_one).setOnClickListener(this);
+        //start kotlin plugin
+        findViewById(R.id.btn_start_kotlin_plugin).setOnClickListener(this);
+        //start plugin webview
+        findViewById(R.id.btn_start_plugin_webview).setOnClickListener(this);
+        //install apk from assets
+        findViewById(R.id.btn_install_apk_from_assets).setOnClickListener(this);
     }
 
     private void testThreadClassLoader() {
@@ -200,17 +164,49 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btn_start_app_one:
                 // 刻意以“包名”来打开
                 RePlugin.startActivity(mContext,
-                        RePlugin.createIntent("com.qihoo360.replugin.sample.demo1",
-                                "com.qihoo360.replugin.sample.demo1.MainActivity"));
+                        RePlugin.createIntent("com.example.appone",
+                                "com.example.appone.MainAppOneActivity"));
                 break;
             case R.id.btn_start_plugin_app_one_for_result:
                 // 刻意以“Alias（别名）”来打开
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName("demo1", "com.qihoo360.replugin.sample.demo1.activity.for_result.ForResultActivity"));
+                intent.setComponent(new ComponentName("appone",
+                        "com.example.appone.activity.for_result.ForResultActivity"));
                 RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_DEMO1, null);
+
                 break;
             case R.id.btn_load_fragment_from_app_one:
                 startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
+                break;
+            case R.id.btn_start_kotlin_plugin:
+                // 若没有安装，则直接提示“错误”
+                // TODO 将来把回调串联上
+                if (RePlugin.isPluginInstalled("demo3")) {
+                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("demo3", "com.qihoo360.replugin.sample.demo3.MainActivity"));
+                } else {
+                    Toast.makeText(MainActivity.this, "You must install demo3 first!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_start_plugin_webview:
+                // 示例：直接通过宿主打开WebView插件中的Activity
+                // FIXME: 后续可以将webview MainActivity URL 改为动态传入
+                // 若没有安装，则直接提示“错误”
+                if (RePlugin.isPluginInstalled("webview")) {
+                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("webview", "com.qihoo360.replugin.sample.webview.MainActivity"));
+                } else {
+                    Toast.makeText(MainActivity.this, "You must install webview first!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_install_apk_from_assets:
+                final ProgressDialog pd = ProgressDialog.show(MainActivity.this, "Installing...", "Please wait...", true, true);
+                // FIXME: 仅用于安装流程演示 2017/7/24
+                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        simulateInstallExternalPlugin();
+                        pd.dismiss();
+                    }
+                }, 1000);
                 break;
             default:
                 break;

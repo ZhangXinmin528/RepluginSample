@@ -27,7 +27,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-// 生成jar
+// 演示生成jar
 task makeJar(type: Jar, dependsOn: ['build']) {
     destinationDir = file('build/outputs/jar/')//文件路径
     baseName = "common-utils-lib"//文件名
