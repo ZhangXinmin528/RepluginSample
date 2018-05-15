@@ -23,12 +23,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'com.android.support:appcompat-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 //演示将aar拷贝进appone的文件夹下,注意名称
@@ -37,8 +32,8 @@ task copyLibrary(type: Copy) {
 
     from('build/outputs/aar/lib.appone-debug.aar')
     into('../app.one/libs')
-    ///Rename the aar
-    rename('lib.appone-debug.aar', 'plugin-library-appone.aar')
+    ///rename the aar
+    rename('lib.appone-debug.aar', 'plugin-library-appone-1.2.aar')
 }
 
 copyLibrary.dependsOn(build)

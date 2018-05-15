@@ -40,7 +40,7 @@
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <!--ThemeDialog-->
         <activity
@@ -69,40 +69,34 @@
         <!--TIActivity-->
         <activity
             android:name=".activity.single_instance.TIActivity"
-            android:launchMode="singleInstance"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:launchMode="singleInstance"/>
 
         <!-- TaskAffinity -->
         <activity
             android:name=".activity.task_affinity.TAActivity1"
             android:launchMode="singleTask"
-            android:taskAffinity=":ta_1"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:taskAffinity=":ta_1"/>
 
         <activity
             android:name=".activity.task_affinity.TAActivity2"
             android:launchMode="singleTask"
-            android:taskAffinity=":ta_1"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:taskAffinity=":ta_1"/>
 
         <activity
             android:name=".activity.task_affinity.TAActivity3"
             android:launchMode="singleTask"
-            android:taskAffinity=":ta_2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:taskAffinity=":ta_2"/>
 
         <activity
             android:name=".activity.task_affinity.TAActivity4"
             android:launchMode="singleTask"
-            android:taskAffinity=":ta_2"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:taskAffinity=":ta_2" />
         <!-- TaskAffinity-end -->
 
 
         <!-- IntentFilter -->
         <activity
-            android:name=".activity.intent_filter.IntentFilterDemoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".activity.intent_filter.IntentFilterDemoActivity">
             <intent-filter>
                 <action android:name="com.example.appone.intent_filter" />
 

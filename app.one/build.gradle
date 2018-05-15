@@ -3,8 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
 
-
-
     defaultConfig {
         applicationId "com.example.appone"
         minSdkVersion 15
@@ -44,13 +42,17 @@ repluginPluginConfig {
     hostAppLauncherActivity = "com.example.repluginsample.MainActivity"
 }
 dependencies {
+    /*configurations {
+            all*.exclude group: 'com.android.support', module: 'support-v4'
+        }*/
+    //这个jar就是从Support-fragment中提取出来的并非特制包目的是为了骗过编译期
     implementation 'com.android.support:appcompat-v7:27.1.1'
     //360 plugin
     implementation 'com.qihoo360.replugin:replugin-plugin-lib:2.2.4'
     //utils by lib.common
-    compileOnly files('libs/common-utils-lib-1.0.0.jar')
+    compileOnly files('libs/common-utils-lib-1.0.1.jar')
     //sample:compile aar(by lib.appone)
-    implementation(name: 'plugin-library-appone', ext: 'aar')
+    implementation(name: 'plugin-library-appone-1.2', ext: 'aar')
 }
 
 if (android.defaultConfig.multiDexEnabled) {
