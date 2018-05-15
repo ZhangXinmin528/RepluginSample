@@ -173,7 +173,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent.setComponent(new ComponentName("appone",
                         "com.example.appone.activity.for_result.ForResultActivity"));
                 RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_DEMO1, null);
-
                 break;
             case R.id.btn_load_fragment_from_app_one:
                 startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));

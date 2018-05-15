@@ -46,6 +46,9 @@ import java.util.List;
 import static com.example.appone.support.NotifyUtils.ACTION_START_NOTIFY_UI;
 import static com.example.appone.support.NotifyUtils.NOTIFY_KEY;
 
+/**
+ * 内置插件
+ */
 public class MainAppOneActivity extends AppCompatActivity {
     private static final String TAG = MainAppOneActivity.class.getSimpleName();
 
@@ -60,8 +63,6 @@ public class MainAppOneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.one_activity_main);
 
-        Log.e(TAG, "onCreate");
-        Toast.makeText(this, TAG + "..onCreate", Toast.LENGTH_LONG).show();
         initParamsAndValues();
 
         initViews();

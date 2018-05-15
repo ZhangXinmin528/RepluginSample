@@ -7,10 +7,17 @@
 
     <fragment
         android:id="@+id/fragment"
-        class="com.example.appone.fragment.DemoFragment"
+        android:name="com.example.appone.fragment.DemoFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <!--<fragment
+        android:id="@+id/fragment"
+        class="com.qihoo360.replugin.sample.demo1.fragment.DemoFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />-->
 
     <!-- line -->
     <LinearLayout

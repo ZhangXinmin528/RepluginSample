@@ -9,9 +9,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--插件别名-->
         <meta-data
-            android:name="process_map"
-            android:value="[appone]" />
+            android:name="com.qihoo360.plugin.name"
+            android:value="appone" />
 
         <activity
             android:name=".MainAppOneActivity"
