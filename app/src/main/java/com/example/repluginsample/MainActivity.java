@@ -161,12 +161,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //to app one
             case R.id.btn_start_app_one:
                 // 刻意以“包名”来打开
                 RePlugin.startActivity(mContext,
                         RePlugin.createIntent("com.example.appone",
                                 "com.example.appone.MainAppOneActivity"));
                 break;
+            //to app one
             case R.id.btn_start_plugin_app_one_for_result:
                 // 刻意以“Alias（别名）”来打开
                 Intent intent = new Intent();
@@ -174,9 +176,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         "com.example.appone.activity.for_result.ForResultActivity"));
                 RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_DEMO1, null);
                 break;
+            //to app one
+            //TODO:测试未通过
             case R.id.btn_load_fragment_from_app_one:
-                startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
+//                startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
                 break;
+            //TODO:测试未通过
             case R.id.btn_start_kotlin_plugin:
                 // 若没有安装，则直接提示“错误”
                 // TODO 将来把回调串联上
@@ -196,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, "You must install webview first!", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            //TODO:测试未通过
             case R.id.btn_install_apk_from_assets:
                 final ProgressDialog pd = ProgressDialog.show(MainActivity.this, "Installing...", "Please wait...", true, true);
                 // FIXME: 仅用于安装流程演示 2017/7/24

@@ -37,6 +37,7 @@ import com.example.appone.activity.webview.WebViewActivity;
 import com.example.appone.service.PluginDemoService1;
 import com.example.appone.support.NotifyUtils;
 import com.example.lib.common.TimeUtils;
+import com.example.sample.apptwo.IDemo2;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.sample.libappone.LibMainActivity;
 
@@ -88,6 +89,7 @@ public class MainAppOneActivity extends AppCompatActivity {
 
     private void initData() {
         //===================================TO host=====================================//
+        //TODO:测试未通过
         mItems.add(new TestItem("Jump to Host App", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +103,7 @@ public class MainAppOneActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName(RePlugin.getHostContext().getPackageName(), "com.qihoo360.replugin.sample.host.MainActivity"));
+                intent.setComponent(new ComponentName("com.example.repluginsample", "com.example.repluginsample.MainActivity"));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -190,36 +192,36 @@ public class MainAppOneActivity extends AppCompatActivity {
             }
         }));
 
-        //=======================================TO other plugin===============================//
-        mItems.add(new TestItem("Activity: AppCompat (to Demo2)", new View.OnClickListener() {
+        //=======================================TO plugin app two===============================//
+        mItems.add(new TestItem("Activity: AppCompat (to AppTwo)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RePlugin.startActivity(v.getContext(), new Intent(), "demo2", "com.qihoo360.replugin.sample.demo2.activity.appcompat.AppCompatActivityDemo");
+                RePlugin.startActivity(v.getContext(), new Intent(), "apptwo", "com.example.sample.apptwo.activity.appcompat.AppCompatActivityDemo");
             }
         }));
 
-        mItems.add(new TestItem("Activity: DataBinding (to Demo2)", new View.OnClickListener() {
+        mItems.add(new TestItem("Activity: DataBinding (to AppTwo)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RePlugin.startActivity(v.getContext(), new Intent(), "demo2", "com.qihoo360.replugin.sample.demo2.databinding.DataBindingActivity");
+                RePlugin.startActivity(v.getContext(), new Intent(), "apptwo", "com.example.sample.apptwo.databinding.DataBindingActivity");
             }
         }));
-        mItems.add(new TestItem("Activity: startForResult (to Demo2)", new View.OnClickListener() {
+        mItems.add(new TestItem("Activity: startForResult (to AppTwo)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setComponent(new ComponentName("demo2", "com.qihoo360.replugin.sample.demo2.activity.for_result.ForResultActivity"));
+                intent.setComponent(new ComponentName("apptwo", "com.example.sample.apptwo.activity.for_result.ForResultActivity"));
                 startActivityForResult(intent, REQUEST_CODE_APP_ONE);
                 // 也可以这么用
                 // RePlugin.startActivityForResult(MainActivity.this, intent, REQUEST_CODE_APP_ONE);
             }
         }));
 
-        mItems.add(new TestItem("Activity: By Action (to Demo2)", new View.OnClickListener() {
+        mItems.add(new TestItem("Activity: By Action (to AppTwo)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("com.qihoo360.replugin.sample.demo2.action.theme_fullscreen_2");
-                RePlugin.startActivity(v.getContext(), intent, "demo2", null);
+                RePlugin.startActivity(v.getContext(), intent, "apptwo", null);
             }
         }));
 
@@ -286,21 +288,21 @@ public class MainAppOneActivity extends AppCompatActivity {
                 }
             }
         }));
-        mItems.add(new TestItem("Use Demo2 Method: Reflection (Recommend)", new View.OnClickListener() {
+        mItems.add(new TestItem("Use App two Method: Reflection (Recommend)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 这是RePlugin的推荐玩法：反射调用Demo2，这样"天然的"做好了"版本控制"
+                // 这是RePlugin的推荐玩法：反射调用App one，这样"天然的"做好了"版本控制"
                 // 避免出现我们当年2013年的各种问题
-                ClassLoader cl = RePlugin.fetchClassLoader("demo2");
+                ClassLoader cl = RePlugin.fetchClassLoader("apptwo");
                 if (cl == null) {
-                    Toast.makeText(v.getContext(), "Not install Demo2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Not install App two", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 try {
-                    Class clz = cl.loadClass("com.qihoo360.replugin.sample.demo2.MainOneApp");
-                    Method m = clz.getDeclaredMethod("helloFromDemo1", Context.class, String.class);
-                    m.invoke(null, v.getContext(), "Demo1");
+                    Class clz = cl.loadClass("com.example.sample.apptwo.MainTwoApp");
+                    Method m = clz.getDeclaredMethod("helloFromAppOne", Context.class, String.class);
+                    m.invoke(null, v.getContext(), "from app one");
                 } catch (Exception e) {
                     // 有可能Demo2根本没有这个类，也有可能没有相应方法（通常出现在"插件版本升级"的情况）
                     Toast.makeText(v.getContext(), "", Toast.LENGTH_SHORT).show();
@@ -308,29 +310,35 @@ public class MainAppOneActivity extends AppCompatActivity {
                 }
             }
         }));
-        mItems.add(new TestItem("Resources: Use demo2's layout", new View.OnClickListener() {
+        mItems.add(new TestItem("Resources: Use app two's layout", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LinearLayout contentView = RePlugin.fetchViewByLayoutName("demo2", "from_demo1", null);
+                LinearLayout contentView = RePlugin.fetchViewByLayoutName("apptwo", "layout_from_app_two", null);
                 if (contentView == null) {
-                    Toast.makeText(v.getContext(), "from_demo1 Not Found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),
+                            "The layout of 'layout_from_app_two.xml' in app two not found!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                LinearLayout.LayoutParams layoutParams =
+                        new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                contentView.setLayoutParams(layoutParams);
+
                 Dialog d = new Dialog(v.getContext());
                 d.setContentView(contentView);
                 d.show();
             }
         }));
-        mItems.add(new TestItem("Binder: Fast-Fetch (to Demo2)", new View.OnClickListener() {
+        //TODO:未测试通过
+        mItems.add(new TestItem("Binder: Fast-Fetch (to App Two)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IBinder b = RePlugin.fetchBinder("demo2", "demo2test");
+                IBinder b = RePlugin.fetchBinder("apptwo", "demo2test");
                 if (b == null) {
                     return;
                 }
-                IAppOne iAppOne = IAppOne.Stub.asInterface(b);
+                IDemo2 appTwo = IDemo2.Stub.asInterface(b);
                 try {
-                    iAppOne.hello("helloooooooooooo");
+                    appTwo.hello("helloooooooooooo");
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -398,6 +406,7 @@ public class MainAppOneActivity extends AppCompatActivity {
         }));
 
         // ====================================Notification=======================================//
+        //TODO：测试未通过
         mItems.add(new TestItem("Send Notification", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

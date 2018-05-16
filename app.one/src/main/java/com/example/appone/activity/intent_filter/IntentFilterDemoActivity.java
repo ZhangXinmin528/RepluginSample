@@ -38,6 +38,6 @@ public class IntentFilterDemoActivity extends BaseActivity {
 
     @Override
     public String btnTxt() {
-        return "null";
+        return "IntentFilterDemoActivity";
     }
 }

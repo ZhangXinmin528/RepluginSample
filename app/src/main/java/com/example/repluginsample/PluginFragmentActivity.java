@@ -32,14 +32,14 @@ public class PluginFragmentActivity extends FragmentActivity {
          * ClassLoader classLoader = RePlugin.fetchClassLoader(name);
          */
 
-        boolean isBuiltIn = false;
+        boolean isBuiltIn = true;
         String pluginName = isBuiltIn ? "appone" : "com.example.appone";
 
         //注册相关Fragment的类
         //注册一个全局Hook用于拦截系统对XX类的寻找定向到AppOne中的XX类主要是用于在xml中可以直接使用插件中的类
-//        RePlugin.registerHookingClass("com.example.appone.fragment.DemoFragment",
-//                RePlugin.createComponentName
-
+                RePlugin.registerHookingClass("com.example.appone.fragment.DemoFragment",
+                        RePlugin.createComponentName(pluginName,
+                                "com.example.appone.fragment.DemoFragment"), null);
 
         setContentView(R.layout.activity_plugin_fragment);
         //代码使用插件Fragment

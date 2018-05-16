@@ -1,0 +1,61 @@
+/**
+ * （内置）插件编译脚本
+ */
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        applicationId "com.example.sample.apptwo"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled false
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+// 这个plugin需要放在android配置之后，因为需要读取android中的配置项
+apply plugin: 'replugin-plugin-gradle'
+repluginPluginConfig {
+    //宿主名
+    pluginName = "apptwo"
+    //宿主id
+    hostApplicationId = "com.example.repluginsample"
+    //宿主launcher
+    hostAppLauncherActivity = "com.example.repluginsample.MainAppTwoActivity"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    //360 plugin
+    implementation 'com.qihoo360.replugin:replugin-plugin-lib:2.2.4'
+}
+if (android.defaultConfig.multiDexEnabled) {
+    apply from: 'case.gradle'
+}

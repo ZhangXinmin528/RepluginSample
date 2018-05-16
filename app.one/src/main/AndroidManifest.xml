@@ -34,7 +34,7 @@
             android:screenOrientation="portrait" />
 
         <!-- theme 测试 -->
-        <!-- NoTitleBar -->
+        <!-- NoTitleBintent_filterar -->
         <activity
             android:name=".activity.theme.ThemeBlackNoTitleBarActivity"
             android:exported="false"
