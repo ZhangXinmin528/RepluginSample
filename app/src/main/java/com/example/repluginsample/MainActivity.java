@@ -195,8 +195,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 示例：直接通过宿主打开WebView插件中的Activity
                 // FIXME: 后续可以将webview MainActivity URL 改为动态传入
                 // 若没有安装，则直接提示“错误”
-                if (RePlugin.isPluginInstalled("webview")) {
-                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("webview", "com.qihoo360.replugin.sample.webview.MainActivity"));
+                if (RePlugin.isPluginInstalled("appwebview")) {
+                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("appwebview", "com.example.appwebview.MainWebActivity"));
                 } else {
                     Toast.makeText(MainActivity.this, "You must install webview first!", Toast.LENGTH_SHORT).show();
                 }
