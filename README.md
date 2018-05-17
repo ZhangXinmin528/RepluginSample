@@ -5,6 +5,7 @@
     <img alt="RePlugin Logo" src="https://github.com/Qihoo360/RePlugin/wiki/img/RePlugin.png" width="400"/>
   </a>
 </p>
+
 项目描述
 -------
 ###本项目是使用Qihoo360/RePlugin进行插件化开发的示例项目，[点击查看框架地址](https://github.com/Qihoo360/RePlugin)
