@@ -7,7 +7,9 @@
 </p>
 项目描述
 -------
-本项目是使用Qihoo360/RePlugin进行插件化开发的示例项目，框架地址：https://github.com/Qihoo360/RePlugin。本项目是依据360Replugin的官方Simple改造而成，通过该项目能够了解360Replugin框架的原理和基本的使用方法[请点击这里查看Sample源代码](https://github.com/Qihoo360/RePlugin/blob/master/replugin-sample)。
+###本项目是使用Qihoo360/RePlugin进行插件化开发的示例项目，[点击查看框架地址](https://github.com/Qihoo360/RePlugin)
+
+###本项目是依据360Replugin的官方Simple改造而成，通过该项目能够了解360Replugin框架的原理和基本的使用方法[请点击这里查看Sample源代码](https://github.com/Qihoo360/RePlugin/blob/master/replugin-sample)。
 
 项目结构
 -------
