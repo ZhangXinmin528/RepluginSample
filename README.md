@@ -25,3 +25,7 @@
 >lib.appone:Android Library,主要测试aar文件的生成。
 
 >lib.common:Android Library,主要用于测试jar的生成和copy功能。
+
+注意事项
+-------
+###在开发过程中总结了使用插件化的常见问题，提供大家一个解决思路。[详情查阅文档]()
