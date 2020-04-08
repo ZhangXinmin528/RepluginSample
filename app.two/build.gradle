@@ -54,7 +54,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
     //360 plugin
-    implementation 'com.qihoo360.replugin:replugin-plugin-lib:2.2.4'
+    implementation 'com.qihoo360.replugin:replugin-plugin-lib:2.3.3'
 }
 if (android.defaultConfig.multiDexEnabled) {
     apply from: 'case.gradle'
