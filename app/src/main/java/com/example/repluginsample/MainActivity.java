@@ -16,7 +16,6 @@
 
 package com.example.repluginsample;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -180,15 +179,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //TODO:测试未通过
             case R.id.btn_load_fragment_from_app_one:
 //                startActivity(new Intent(MainActivity.this, PluginFragmentActivity.class));
+                Toast.makeText(mContext, "测试未通过~", Toast.LENGTH_SHORT).show();
                 break;
             //TODO:测试未通过
             case R.id.btn_start_kotlin_plugin:
                 // 若没有安装，则直接提示“错误”
                 // TODO 将来把回调串联上
                 if (RePlugin.isPluginInstalled("demo3")) {
-                    RePlugin.startActivity(MainActivity.this, RePlugin.createIntent("demo3", "com.qihoo360.replugin.sample.demo3.MainActivity"));
+                    RePlugin.startActivity(MainActivity.this,
+                            RePlugin.createIntent("demo3", "com.qihoo360.replugin.sample.demo3.MainActivity"));
                 } else {
-                    Toast.makeText(MainActivity.this, "You must install demo3 first!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "You must install demo3 first!", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_start_plugin_webview:
